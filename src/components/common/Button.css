@@ -5,11 +5,22 @@ button {
     background-color: transparent;
     cursor: pointer;
     font-size: 1em;
+    transition: .4s;
 }
 
 button.add {
     padding: 5px 20px;
     font-size: 1.2em;
     background-color: #FC6A47;
+
+
+}
+
+button:hover {
+    color: #FC6A47;
+}
+
+button.add:hover {
+    background-color: white;
 
 }

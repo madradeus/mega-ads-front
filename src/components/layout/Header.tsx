@@ -5,7 +5,7 @@ import './Header.css';
 
 export const Header = () => (
     <header>
-        <h1><span>Mega</span>Ads</h1>
+        <h1><span>Mega</span>Ads 📢</h1>
         <MainButton>DODAJ OGŁOSZENIE</MainButton>
         <form className="search">
             <input type="text"/>
