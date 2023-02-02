@@ -1,4 +1,4 @@
 .map {
-    background-color: green;
-    height: 100vh;
+    background-color: lightgreen;
+    height: calc(100vh - 70px);
 }

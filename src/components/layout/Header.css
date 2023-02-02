@@ -4,23 +4,26 @@ header {
     display: flex;
     padding: 10px 15px;
     justify-content: space-between;
-    min-height: 50px;
-    height: 5vh;
+    height: 50px;
     align-items: center;
-    position: sticky;
     top: 0;
+    text-decoration: none
+}
 
-
+header a {
+    text-decoration: none
 }
 
 header span {
     color: white;
     font-weight: 700;
+
 }
 
 h1 {
     font-weight: 200;
     color: #FC6A47;
+
 
 }
 .search {

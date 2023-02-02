@@ -5,11 +5,13 @@ import './Header.css';
 
 export const Header = () => (
     <header>
-        <h1><span>Mega</span>Ads 📢</h1>
-        <MainButton>DODAJ OGŁOSZENIE</MainButton>
+        <a href="/">
+            <h1><span>mega</span>Ads 📣</h1>
+        </a>
+        <MainButton>dodaj ogłoszenie</MainButton>
         <form className="search">
             <input type="text"/>
-            <SecondaryButton>SZUKAJ</SecondaryButton>
+            <SecondaryButton>szukaj</SecondaryButton>
         </form>
     </header>
 );
