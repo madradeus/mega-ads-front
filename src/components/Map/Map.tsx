@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 
 import './Map.css'
 import 'leaflet/dist/leaflet.css'
 import '../../utils/fix-map-icon'
+import { SearchContext } from "../../contexts/SearchContext";
 
 
 export const Map = () => {
 
+    const { nameToSearch } = useContext(SearchContext);
+
+    useEffect(() => {
+        console.log(`odpytuję bazę o ${nameToSearch}`)
+    }, [nameToSearch]);
+
+
     const position = [49.15535141555375, 22.46817354258396]
     return (
         <div className="map">
+
             <MapContainer center={(position as LatLngExpression)} zoom={15}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
