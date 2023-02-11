@@ -1,7 +1,7 @@
 import React from "react";
 import { MainButton } from "../common/MainButton";
-import { SecondaryButton } from "../common/SecondaryButton";
 import './Header.css';
+import { SearchBox } from "../SearchBox/SearchBox";
 
 export const Header = () => (
     <header>
@@ -9,9 +9,6 @@ export const Header = () => (
             <h1 className='logo'><span>mega</span>Ads 📣</h1>
         </a>
         <MainButton>dodaj ogłoszenie</MainButton>
-        <form className="search">
-            <input type="text"/>
-            <SecondaryButton>szukaj</SecondaryButton>
-        </form>
+        <SearchBox/>
     </header>
 );
