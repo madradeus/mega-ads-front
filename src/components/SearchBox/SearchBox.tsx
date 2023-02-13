@@ -27,14 +27,14 @@ export const SearchBox = () => {
                 ?
                 <form className="search" onSubmit={passSearchValue}>
                     <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-                    <SecondaryButton>szukaj</SecondaryButton>
+                    <SecondaryButton>search</SecondaryButton>
                 </form>
                 :
-                <form className="search" onSubmit={passSearchValue}>
-                    <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-                    <SecondaryButton>szukaj</SecondaryButton>
-                </form>
-
+                <button onClick={() => setIsExpanded(prevState => !prevState)}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '34px', fontWeight: 'bold' }}>
+                        search
+                    </span>
+                </button>
 
             }
         </>

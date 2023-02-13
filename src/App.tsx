@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Header } from "./components/layout/Header";
-import { Map } from "./components/Map/Map";
 import { SearchContext } from "./contexts/SearchContext";
+import { MainView } from "./views/MainView";
+import { Route, Routes } from "react-router-dom";
+import { AddFormView } from "./views/AddFormView";
 
 
 export function App() {
@@ -13,8 +14,11 @@ export function App() {
             nameToSearch,
             setNameToSearch,
         }}>
-            <Header/>
-            <Map/>
+            <Routes>
+                <Route path="/" element={<MainView/>}/>
+                <Route path="/add" element={<AddFormView/>}/>
+            </Routes>
+
         </SearchContext.Provider>
     );
 }

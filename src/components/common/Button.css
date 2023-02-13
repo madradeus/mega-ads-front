@@ -1,4 +1,4 @@
-button {
+header button, header a {
     border: none;
     border-radius: 4px;
     color: white;
@@ -9,19 +9,25 @@ button {
     text-transform: uppercase;
 }
 
-button.add {
+.add {
     padding: 5px 20px;
     font-size: 1.2em;
     background-color: #FC6A47;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
+.primary-btn {
 
 }
 
-button:hover {
+button:hover, .add:hover {
     color: #FC6A47;
 }
 
-button.add:hover {
+button.add:hover, .add:hover {
     background-color: white;
 
 }

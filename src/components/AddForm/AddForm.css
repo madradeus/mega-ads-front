@@ -1,0 +1,11 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+.form {
+    width: 80%;
+    border: 1px solid green;
+}
+

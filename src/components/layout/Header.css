@@ -7,7 +7,8 @@ header {
     height: 50px;
     align-items: center;
     top: 0;
-    text-decoration: none
+    text-decoration: none;
+    position: relative;
 }
 
 header a {
@@ -18,6 +19,10 @@ header span {
     color: white;
     font-weight: 700;
 
+}
+
+.logo {
+    text-transform: lowercase;
 }
 
 h1 {
