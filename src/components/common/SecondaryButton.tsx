@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const SecondaryButton = ({ children }: Props) => (
-    <button>{children}</button>
+    <button className="search">{children}</button>
 )
