@@ -7,8 +7,8 @@
     width: 60%;
 }
 
-.form input, .form textarea {
-    margin-bottom: 20px;
+.form p {
+    margin-top: 20px;
 }
 
 .title {

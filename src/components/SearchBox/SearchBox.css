@@ -1,6 +1,7 @@
 .search {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .search input {
@@ -9,6 +10,12 @@
     border-radius: 4px;
     border: 2px solid transparent;;
     width: 14em;
+}
+
+.search svg {
+    position: absolute;
+    right: 27%;
+    cursor: pointer;
 }
 
 .search input:focus {

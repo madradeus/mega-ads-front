@@ -23,7 +23,7 @@ header button, header a {
 
 }
 
-.search:hover, .add:hover {
+.search a:hover, .add:hover, .search svg:hover, button.search:hover {
     color: #FC6A47;
 }
 
