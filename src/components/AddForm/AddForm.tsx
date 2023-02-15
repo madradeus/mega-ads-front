@@ -4,6 +4,8 @@ import "./AddForm.css"
 import {
     Button,
     ButtonGroup,
+    FormControl,
+    FormLabel,
     Input,
     InputGroup,
     InputRightAddon,
@@ -14,10 +16,13 @@ import {
     NumberInputStepper,
     Text,
     Textarea,
-    Tooltip
+    Tooltip,
+    useToast
 } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import { Loader } from "../common/Loader/Loader";
+import { api } from "../../lib/api";
+import { getLocationInfo } from "../../utils/getLocationInfo";
 
 export const AddForm = () => {
 
@@ -29,21 +34,47 @@ export const AddForm = () => {
         address: ''
     });
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
+    const toast = useToast()
 
 
     const handleFormValues = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormValues(prevState => ({
             ...prevState,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.name === 'price' ? Number(e.target.value) : e.target.value,
         }))
     }
 
     const handleSaveAd = async (e: SyntheticEvent) => {
-        e.preventDefault()
-        console.log('click')
-        navigate('/')
+        setLoading(true);
+        e.preventDefault();
+        try {
+            const geoLocation = await getLocationInfo(formValues.address);
+            await api.insert({
+                ...formValues,
+                lon: Number(geoLocation.lon),
+                lat: Number(geoLocation.lat),
+            })
+            toast({
+                position: "top-right",
+                title: 'Ad created.',
+                description: "We've created your ad for you.",
+                status: 'success',
+                duration: 3000,
+            })
+            navigate(`/${geoLocation.lat}/${geoLocation.lon}/18`);
+        } catch (e: any) {
+            setLoading(false)
+            toast({
+                position: "top-right",
+                title: 'Error',
+                description: e.message,
+                status: 'error',
+                duration: 3000,
+            })
+        } finally {
+            setLoading(false);
+        }
     }
 
     if ( loading ) {
@@ -53,13 +84,16 @@ export const AddForm = () => {
     return (
         <div className="form-container">
             <form className="form" onSubmit={handleSaveAd}>
-                <h1 className="title">Add a new ad</h1>
-                <label>
-                    <Text mb='8px'>Name:</Text>
-                    <Input required variant='outline' name="name" value={formValues.name}
-                           onChange={handleFormValues}/>
-                </label>
-                <label>
+                <h1 className="title">Create a new ad</h1>
+                <FormControl isInvalid={!formValues.name && formValues.name !== ''}>
+                    <FormLabel>
+                        <Text mb='8px'>Name:</Text>
+                        <Input required variant='outline' name="name" value={formValues.name}
+                               onChange={handleFormValues}/>
+                    </FormLabel>
+                </FormControl>
+
+                <FormLabel>
                     <Text mb='8px'>Description:</Text>
                     <Textarea
                         name="description"
@@ -69,13 +103,17 @@ export const AddForm = () => {
                         placeholder='Write something more...'
                         size='sm'
                     />
-                </label>
-                <label>
+                </FormLabel>
+                <FormLabel>
                     <Text mb='8px'>Price:</Text>
                     <InputGroup size='sm'>
-                        <NumberInput precision={2} step={1.0} min={0} defaultValue={0.00}>
-                            <NumberInputField required name='price' value={formValues.price}
-                                              onChange={handleFormValues}/>
+                        <NumberInput precision={2} step={1.0} min={0} name='price' defaultValue={0.00}
+                                     value={formValues.price}
+                                     onChange={(valueAsString, valueAsNumber) => setFormValues(prevState => ({
+                                         ...prevState,
+                                         price: valueAsNumber
+                                     }))}>
+                            <NumberInputField required type='number'/>
                             <NumberInputStepper>
                                 <NumberIncrementStepper/>
                                 <NumberDecrementStepper/>
@@ -83,19 +121,20 @@ export const AddForm = () => {
                         </NumberInput>
                         <InputRightAddon children='EUR'/>
                     </InputGroup>
-                </label>
-                <label>
+                </FormLabel>
+                <FormLabel>
                     <Text mb='8px'>External link to the ad:</Text>
                     <Input required variant='outline' name='url' value={formValues.url}
                            onChange={handleFormValues}/>
-                </label>
-                <label>
+                </FormLabel>
+                <FormLabel>
                     <Text mb='8px'>Address:
-                        <Tooltip label='Format: city, street number' fontSize='md'>
+                        <Tooltip label='f.ex. Maltańska 1/1 Poznań' fontSize='md'>
                             <InfoIcon/>
                         </Tooltip></Text>
-                    <Input required variant='outline'/>
-                </label>
+                    <Input required variant='outline' name='address' value={formValues.address}
+                           onChange={handleFormValues}/>
+                </FormLabel>
                 <div className="btn-group">
                     <ButtonGroup variant='outline' spacing='6'>
                         <Button><Link className="cancel" to="/">Cancel</Link></Button>

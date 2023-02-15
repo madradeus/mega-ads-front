@@ -15,7 +15,7 @@ export function App() {
             setNameToSearch,
         }}>
             <Routes>
-                <Route path="/" element={<MainView/>}/>
+                <Route path="/:lat?/:lon?/:zoom?" element={<MainView/>}/>
                 <Route path="/add" element={<AddFormView/>}/>
             </Routes>
 
