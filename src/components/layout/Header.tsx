@@ -8,7 +8,7 @@ export const Header = () => (
         <a className="logo" href="/">
             <h1 className='logo'><span>mega</span>Ads 📣</h1>
         </a>
-        <MainButton>add new ad</MainButton>
+        <MainButton>create new ad</MainButton>
         <SearchBox/>
     </header>
 );
