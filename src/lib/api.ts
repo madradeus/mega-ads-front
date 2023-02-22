@@ -34,10 +34,10 @@ export class Api {
             body: JSON.stringify(ad)
         })
 
-        const data = await res.json();
         if ( res.status !== 201 ) {
-            throw new Error(data.message)
+            throw new Error(res.statusText)
         }
+        const data = await res.json();
         return data.id;
     }
 
