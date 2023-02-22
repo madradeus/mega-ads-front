@@ -1,15 +1,25 @@
-import React from 'react';
-import { Header } from "./components/layout/Header";
-import { Map } from "./components/Map/Map";
+import React, { useState } from 'react';
+import { SearchContext } from "./contexts/SearchContext";
+import { MainView } from "./views/MainView";
+import { Route, Routes } from "react-router-dom";
+import { AddFormView } from "./views/AddFormView";
 
 
 export function App() {
 
+    const [nameToSearch, setNameToSearch] = useState('');
+
     return (
-        <>
-            <Header/>
-            <Map/>
-        </>
+        <SearchContext.Provider value={{
+            nameToSearch,
+            setNameToSearch,
+        }}>
+            <Routes>
+                <Route path="/:lat?/:lon?/:zoom?" element={<MainView/>}/>
+                <Route path="/add" element={<AddFormView/>}/>
+            </Routes>
+
+        </SearchContext.Provider>
     );
 }
 

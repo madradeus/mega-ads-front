@@ -1,4 +1,5 @@
 import './Button.css';
+import { Link } from "react-router-dom";
 
 interface Props {
     children: string
@@ -6,6 +7,6 @@ interface Props {
 
 export const MainButton = ({ children }: Props) => {
     return (
-        <button className="add">{children}</button>
+        <Link to="/add" className="add">{children}</Link>
     )
 };
